@@ -94,7 +94,7 @@ class ListPageFragment :
     }
 
     private fun callApiThread() {
-        Thread { mCallViewModel.mCallApi(mPageTitleStr, mApiPosition) }.start()
+        Thread { mCallViewModel.mCallApi(mPageTitle, mApiPosition) }.start()
     }
 
     private fun getRoom(pPosition: Int, pContext: Context) {

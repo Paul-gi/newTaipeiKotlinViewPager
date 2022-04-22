@@ -1,6 +1,7 @@
 package com.example.newtaipeizookotlin.room
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 
 
@@ -15,5 +16,9 @@ interface ViewPagerListDataDao {
     fun findListDataStr(
         FragmentPageCode: Int?
     ): ViewPagerListData?
+
+
+    @Insert
+    fun insertUser(viewPagerListData: ViewPagerListData?)
 
 }

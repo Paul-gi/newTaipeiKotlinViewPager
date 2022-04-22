@@ -2,9 +2,12 @@
 
 package com.example.newtaipeizookotlin.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.newtaipeizookotlin.datalist.ListData
+import com.example.newtaipeizookotlin.room.AppDataBase
+import com.example.newtaipeizookotlin.room.ViewPagerListData
 import com.example.newtaipeizookotlin.service.RetrofitManager
 import com.example.newtaipeizookotlin.service.ZooApiService
 import com.example.newtaipeizookotlin.tools.UtilCommonStr
@@ -29,6 +32,9 @@ class ListPageCallViewModel : ViewModel() {
     private var mGettingData = false
     private var mCall: Call<JsonObject>? = null
 
+    private var mRawDataStr = ""
+
+
     fun getDataListObserver(): MutableLiveData<ArrayList<ListData>?> {
         return mDataList
     }
@@ -42,7 +48,7 @@ class ListPageCallViewModel : ViewModel() {
     }
 
 
-    fun mCallApi(pTitleName: String, pPosition:Int) {
+    fun mCallApi(pTitleName: String, pPosition: Int) {
         val iDataMax = 20
         if (mNotMoreData) {
             return
@@ -74,11 +80,12 @@ class ListPageCallViewModel : ViewModel() {
                 try {
                     assert(response.body() != null)
                     val iRawData = response.body().toString()
+                    mRawDataStr = iRawData
                     val iListData = setRawDataToArrayList(iRawData)
 
-                    if( iListData.isNotEmpty()) {
-                        mRawData.postValue(iRawData)
-                    }
+//                    if( iListData.isNotEmpty()) {
+//                        mRawData.postValue(iRawData)
+//                    }
 
                     if (iListData.size == iDataMax) {
                         mIndex += iDataMax
@@ -98,7 +105,8 @@ class ListPageCallViewModel : ViewModel() {
         })
     }
 
-    fun setRawDataToArrayList(iRawData: String):ArrayList<ListData> {
+
+    fun setRawDataToArrayList(iRawData: String): ArrayList<ListData> {
         val iListData: ArrayList<ListData> = ArrayList<ListData>()
         val ix = JSONObject(iRawData)
         val iz = ix.getJSONObject("result").getJSONArray("results")
@@ -109,65 +117,33 @@ class ListPageCallViewModel : ViewModel() {
             iListData.add(iData)
         }
         mDataList.postValue(iListData)
-        return  iListData
+        return iListData
     }
 
-    fun mCallApi(pTitleName: String) {
 
-        if (mNotMoreData) {
-            return
-        }
-        if (mGettingData) {
-            return
-        }
-        synchronized(this) { mGettingData = true }
-        val mZooApiService: ZooApiService =
-            RetrofitManager().getInstance().createService(ZooApiService::class.java)
-
-
-        mCall = when (pTitleName) {
-            UtilCommonStr.getInstance().mAnimal -> {
-                mZooApiService.getAnimalData(50, mIndex)
+    fun setViewPagerListDataRoom(pPosition: Int, pContext: Context) {
+        //查詢
+        val mApDataBase: AppDataBase? =
+            pContext.let { AppDataBase.getInstance(it, "ViewPagerDataList") }
+        //插入
+        mApDataBase?.viewPagerListDataDao()?.insertUser(
+            ViewPagerListData().apply {
+                FragmentPageCode = pPosition
+                RawListDataStr = mRawDataStr
             }
-            UtilCommonStr.getInstance().mPlant -> {
-                mZooApiService.getPlantData(50, mIndex)
-            }
-            else -> {
-                mZooApiService.getPavilionData(pTitleName, 50, mIndex)
-            }
-        }
-
-
-
-        mCall?.enqueue(object : Callback<JsonObject?> {
-            override fun onResponse(call: Call<JsonObject?>, response: Response<JsonObject?>) {
-                try {
-                    val iListData: ArrayList<ListData> = ArrayList<ListData>()
-                    assert(response.body() != null)
-                    val ix = JSONObject(response.body().toString())
-                    val iz = ix.getJSONObject("result").getJSONArray("results")
-                    for (i in 0 until iz.length()) {
-                        val iData = ListData()
-                        iData.setData(iz.getJSONObject(i))
-                        iData.selectType(pTitleName, false)
-                        iListData.add(iData)
-                    }
-                    mDataList.postValue(iListData)
-                    if (iListData.size == 50) {
-                        mIndex += 50
-                    } else {
-                        mNotMoreData = true
-                        mIsNoData.postValue(true)
-                    }
-                    mGettingData = false
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            }
-
-            override fun onFailure(call: Call<JsonObject?>, t: Throwable) {
-                mDataList.postValue(null)
-            }
-        })
+        )
     }
+
+
+    fun getViewPagerListDataRoom(pPosition: Int, pContext: Context) {
+        val iFindDataInRoom = AppDataBase.getInstance(pContext, "ViewPagerDataList")
+            ?.viewPagerListDataDao()?.findListDataStr(pPosition)
+        if (iFindDataInRoom != null) {
+            iFindDataInRoom.RawListDataStr?.let { setRawDataToArrayList(it) }
+        } else {
+            mDataList.postValue(null)
+        }
+    }
+
+
 }

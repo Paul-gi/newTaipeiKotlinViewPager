@@ -11,7 +11,6 @@ import java.util.ArrayList
 class ListViewPagerAdapter(
     mFragmentManager: FragmentManager,
     mLifecycle: Lifecycle,
-    mDataList: ArrayList<ListData>,
     mCount: Int
 ) : FragmentStateAdapter(mFragmentManager, mLifecycle) {
 

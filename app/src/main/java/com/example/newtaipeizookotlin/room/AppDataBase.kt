@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [User::class], version = 2, exportSchema = false)
 abstract class AppDataBase : RoomDatabase() {
 
 
@@ -14,9 +14,13 @@ abstract class AppDataBase : RoomDatabase() {
         var instance: AppDataBase? = null
 
         @Synchronized
-        fun getInstance(context: Context): AppDataBase? {
+        fun getInstance(context: Context, pDBName: String): AppDataBase? {
             if (instance == null) {
-                instance = Room.databaseBuilder(context.applicationContext, AppDataBase::class.java, "user_db")
+                instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDataBase::class.java,
+                    pDBName
+                )
                     .fallbackToDestructiveMigration()
                     .build()
             }
@@ -26,5 +30,6 @@ abstract class AppDataBase : RoomDatabase() {
 
 
     abstract fun userDao(): UserDao
+    abstract fun viewPagerListDataDao(): ViewPagerListDataDao
 
 }

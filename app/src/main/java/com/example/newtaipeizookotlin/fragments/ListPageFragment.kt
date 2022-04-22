@@ -1,6 +1,5 @@
 package com.example.newtaipeizookotlin.fragments
 
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -9,7 +8,6 @@ import com.example.newtaipeizookotlin.R
 import com.example.newtaipeizookotlin.adapter.ListDataAdapter
 import com.example.newtaipeizookotlin.databinding.ListPageFragmentBinding
 import com.example.newtaipeizookotlin.datalist.ListData
-import com.example.newtaipeizookotlin.tools.UtilCommonStr
 import com.example.newtaipeizookotlin.viewmodel.ListPageCallViewModel
 
 class ListPageFragment :
@@ -22,12 +20,6 @@ class ListPageFragment :
     private var mGridLayoutManager: GridLayoutManager? = null
     private var mIsNoData = false
     private var mPageState = true
-
-
-    private var mPageTitle = ""
-    private var mApiPosition = -1
-    private var mOriginPosition = -1
-    private var mHashMap: HashMap<Int, String>?= null
 
     private val mCallViewModel: ListPageCallViewModel by lazy {
         ViewModelProvider(this).get(ListPageCallViewModel::class.java)
@@ -49,34 +41,7 @@ class ListPageFragment :
         mGridLayoutManager = GridLayoutManager(activity, 2)
         mDataBinding.mRecycleView.layoutManager = mLinearLayoutManager
 
-
-        /**
-         * title back btn
-         */
-//        mDataBinding.mToolbarLayout.mToolbar.title = mPageTitle
-//        mDataBinding.mToolbarLayout.mBackBtn.setOnClickListener {
-//            onBackToPage()
-//        }
-
         mDataBinding.mRecycleView.adapter = mListDataAdapter
-
-        /**
-         * 切換鍵
-         */
-//        mDataBinding.mToolbarLayout.mChange.setOnClickListener {
-//            if (!mPageState) {
-//                mDataBinding.mRecycleView.layoutManager = mLinearLayoutManager
-//                mPageState = true
-//            } else {
-//                mDataBinding.mRecycleView.layoutManager = mGridLayoutManager
-//                mPageState = false
-//            }
-//            //todo mListDataAdapter.setPageState(mPageState)
-//            //  mDataBinding.mRecycleView.adapter = mListDataAdapter    是否多做一步？
-//            //  answer : 沒有因為是點擊後才會重設定adapter 否則切換鍵ui會跑掉
-//            mListDataAdapter.setPageState(mPageState)
-//            mDataBinding.mRecycleView.adapter = mListDataAdapter
-//        }
 
 
         //================================RecycleView 到底刷新的部分＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -109,10 +74,6 @@ class ListPageFragment :
             }
         })
 
-//        mCallViewModel.getDataFFFFState().observe(viewLifecycleOwner, { pString ->
-//            val pTTT = pString
-//
-//        })
 
         callApiThread()
     }

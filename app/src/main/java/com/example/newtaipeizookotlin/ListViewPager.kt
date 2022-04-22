@@ -31,7 +31,6 @@ class ListViewPager : BaseFragment<ListviewpagerBinding>() {
             ListViewPagerAdapter(
                 myApplication.mParentFragmentManager,
                 lifecycle,
-                myApplication.mViewPagerDataList,
                 mViewPagerCount * 2
             )
         mDataBinding.viewPager2.adapter = pListViewPagerAdapter

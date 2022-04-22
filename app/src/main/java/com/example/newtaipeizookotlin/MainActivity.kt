@@ -29,7 +29,6 @@ open class MainActivity : AppCompatActivity() {
     private var mTitleStr = ""
     private var mPageCode = -1
     private var mFormFirebase = false
-    private val mHandler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,29 +38,13 @@ open class MainActivity : AppCompatActivity() {
         actionbar?.hide()//隱藏暗色主題actionBar
         supportActionBar?.hide()//隱藏亮色主題actionBar
 
-        myApplication.setViewPagerApi()
         getBundle(intent)
         initView()
         fcmTest()
     }
 
     private fun initView() {
-//        val pThread = Thread { myApplication.setViewPagerApi() }
-//        pThread.start()
-//        synchronized(pThread) {
-//            Log.d("GGGG",myApplication.mViewPagerDataList.size.toString())
-//            pThread.wait()
-//        }
-//        Log.d("GGGG",myApplication.mViewPagerDataList.size.toString())
-        if (myApplication.mViewPagerDataList.size != 0) {
-            Log.d("GGGGGG", "1111")
-            funSelectPage()
-        } else {
-            mHandler.postDelayed({
-                initView()
-            }, 100)
-            Log.d("GGGGGG", "2222")
-        }
+        funSelectPage()
     }
 
     private fun init() {
@@ -151,7 +134,6 @@ open class MainActivity : AppCompatActivity() {
     }
 
     private fun funSelectPage() {
-        Log.d("GGGGG", myApplication.mViewPagerDataList.size.toString())
         myApplication.setMyFragmentManager(this.supportFragmentManager)
         setBundle()
 

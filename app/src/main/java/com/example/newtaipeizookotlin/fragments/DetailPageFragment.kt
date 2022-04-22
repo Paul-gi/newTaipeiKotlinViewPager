@@ -1,6 +1,7 @@
 package com.example.newtaipeizookotlin.fragments
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -84,7 +85,8 @@ class DetailPageFragment : BaseFragment<MainDetailFragmentBinding>() {
 
     private fun setRoom() {
         Thread {
-            val mApDataBase: AppDataBase? = this.let { AppDataBase.getInstance(requireContext()) }
+            val mApDataBase: AppDataBase? =
+                this.let { AppDataBase.getInstance(requireContext(), "user_db") }
             mApDataBase?.userDao()?.insertUser(
                 User().apply {
                     pageName = mPageTitleStr

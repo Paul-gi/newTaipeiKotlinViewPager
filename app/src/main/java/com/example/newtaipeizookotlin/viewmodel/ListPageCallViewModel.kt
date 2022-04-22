@@ -4,7 +4,6 @@ package com.example.newtaipeizookotlin.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.newtaipeizookotlin.MyApplication
 import com.example.newtaipeizookotlin.datalist.ListData
 import com.example.newtaipeizookotlin.service.RetrofitManager
 import com.example.newtaipeizookotlin.service.ZooApiService
@@ -42,9 +41,6 @@ class ListPageCallViewModel : ViewModel() {
         return mIsNoData
     }
 
-//    fun getDataFFFFState(): MutableLiveData<String> {
-//        return mFFF
-//    }
 
     fun mCallApi(pTitleName: String, pPosition:Int) {
         val iDataMax = 20

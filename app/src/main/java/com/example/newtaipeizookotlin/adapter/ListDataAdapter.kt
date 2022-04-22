@@ -133,7 +133,7 @@ class ListDataAdapter(
             synchronized(mSynchronizedUsed) {
                 val iFindData = mAlreadyRead.indexOf(pPosition)
                 if (iFindData == -1) {
-                    val iFindDataInRoom = AppDataBase.getInstance(context)
+                    val iFindDataInRoom = AppDataBase.getInstance(context, "user_db")
                         ?.userDao()?.findByName(mTitleName, pPosition, pEnglishName, pChineseName)
                     if (iFindDataInRoom != null) {
                         mAlreadyRead.add(pPosition)
@@ -156,7 +156,8 @@ class ListDataAdapter(
 //                AppDataBase db = Room.databaseBuilder(context, AppDataBase.class, "clickStore").build();
             val iListData: ListData = mZooDataList[pPosition]
             //查詢
-            val mApDataBase: AppDataBase? = context.let { AppDataBase.getInstance(it) }
+            val mApDataBase: AppDataBase? =
+                context.let { AppDataBase.getInstance(it, "user_db") }
             //            mApDataBase.userDao().getUserList();
 
             //插入

@@ -2,47 +2,18 @@ package com.example.newtaipeizookotlin
 
 import android.app.Application
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.newtaipeizookotlin.datalist.ListData
 import com.example.newtaipeizookotlin.fragments.DetailPageFragment
 import com.example.newtaipeizookotlin.fragments.GoogleMapFragment
 import com.example.newtaipeizookotlin.fragments.HomePageFragment
 import com.example.newtaipeizookotlin.fragments.ListPageFragment
-import com.example.newtaipeizookotlin.service.RetrofitManager
-import com.example.newtaipeizookotlin.service.ZooApiService
-import com.example.newtaipeizookotlin.tools.UtilCommonStr
-import com.google.gson.JsonObject
-import okhttp3.internal.wait
-import org.json.JSONException
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
 
 class MyApplication : Application() {
-
+    val ViewPagerDataList_db = "ViewPagerDataList_db"
     var mOpenDepartmentSelectPage = false
     lateinit var mParentFragmentManager: FragmentManager
-    var mCall: Call<JsonObject>? = null
-    var mViewPagerDataList: ArrayList<ListData> = ArrayList<ListData>()
-    private val mHandler = Handler(Looper.getMainLooper())
-
-
-    fun setViewPagerApi() {
-//        val pThread = Thread {  }
-//        pThread.start()
-//        synchronized(pThread) {
-//            pThread.wait()
-//        }
-//        Log.d("GGGG","Plant")
-        mCallApi(UtilCommonStr.getInstance().mAnimal)
-        mCallApi(UtilCommonStr.getInstance().mPlant)
-    }
 
 
     fun setMyFragmentManager(pParentFragmentManager: FragmentManager) {
@@ -147,51 +118,5 @@ class MyApplication : Application() {
                     .commit()
             }
         }
-    }
-
-
-    private fun mCallApi(pTitleName: String) {
-        val mZooApiService: ZooApiService =
-            RetrofitManager().getInstance().createService(ZooApiService::class.java)
-
-        mCall = when (pTitleName) {
-            UtilCommonStr.getInstance().mAnimal -> {
-                mZooApiService.getAnimalData(100, 0)
-            }
-            UtilCommonStr.getInstance().mPlant -> {
-                mZooApiService.getPlantData(100, 0)
-            }
-            else -> {
-                mZooApiService.getPavilionData(pTitleName, 20, 0)
-            }
-        }
-
-
-
-        mCall?.enqueue(object : Callback<JsonObject?> {
-            override fun onResponse(call: Call<JsonObject?>, response: Response<JsonObject?>) {
-                try {
-                    val iListData: ArrayList<ListData> = ArrayList<ListData>()
-                    assert(response.body() != null)
-                    val ix = JSONObject(response.body().toString())
-                    val iz = ix.getJSONObject("result").getJSONArray("results")
-                    for (i in 0 until iz.length()) {
-                        val iData = ListData()
-                        iData.setData(iz.getJSONObject(i))
-                        iData.selectType(pTitleName, false)
-                        iListData.add(iData)
-                    }
-
-                    mViewPagerDataList += iListData
-
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            }
-
-            override fun onFailure(call: Call<JsonObject?>, t: Throwable) {
-                Log.d("error", t.toString())
-            }
-        })
     }
 }

@@ -3,6 +3,7 @@
 package com.example.newtaipeizookotlin.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.newtaipeizookotlin.datalist.ListData
@@ -17,7 +18,6 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class ListPageCallViewModel : ViewModel() {
     private val mDataList: MutableLiveData<ArrayList<ListData>?> =
@@ -31,6 +31,7 @@ class ListPageCallViewModel : ViewModel() {
     private var mNotMoreData = false
     private var mGettingData = false
     private var mCall: Call<JsonObject>? = null
+    private var mPageTitle = ""
 
     private var mRawDataStr = ""
 
@@ -50,6 +51,7 @@ class ListPageCallViewModel : ViewModel() {
 
     fun mCallApi(pTitleName: String, pPosition: Int) {
         val iDataMax = 20
+        mPageTitle = pTitleName
         if (mNotMoreData) {
             return
         }
@@ -81,7 +83,7 @@ class ListPageCallViewModel : ViewModel() {
                     assert(response.body() != null)
                     val iRawData = response.body().toString()
                     mRawDataStr = iRawData
-                    val iListData = setRawDataToArrayList(iRawData)
+                    val iListData = setRawDataToArrayList(mRawDataStr, pTitleName)
 
 //                    if( iListData.isNotEmpty()) {
 //                        mRawData.postValue(iRawData)
@@ -106,14 +108,15 @@ class ListPageCallViewModel : ViewModel() {
     }
 
 
-    fun setRawDataToArrayList(iRawData: String): ArrayList<ListData> {
-        val iListData: ArrayList<ListData> = ArrayList<ListData>()
+    fun setRawDataToArrayList(iRawData: String, pTitleName: String): ArrayList<ListData> {
+        val iListData: ArrayList<ListData> = ArrayList()
+        Log.d("GGGGG", iRawData)
         val ix = JSONObject(iRawData)
         val iz = ix.getJSONObject("result").getJSONArray("results")
         for (i in 0 until iz.length()) {
             val iData = ListData()
             iData.setData(iz.getJSONObject(i))
-//            iData.selectType(pTitleName, false)
+            iData.selectType(pTitleName, false)
             iListData.add(iData)
         }
         mDataList.postValue(iListData)
@@ -130,16 +133,21 @@ class ListPageCallViewModel : ViewModel() {
             ViewPagerListData().apply {
                 FragmentPageCode = pPosition
                 RawListDataStr = mRawDataStr
+                Log.d("GGGGG", "FragmentPageCode = " + FragmentPageCode.toString())
+                Log.d("GGGGG", "RawListDataStr = " + RawListDataStr.toString())
             }
         )
     }
 
 
-    fun getViewPagerListDataRoom(pPosition: Int, pContext: Context) {
+    fun getViewPagerListDataRoom(pPosition: Int, pContext: Context, pTitleName: String) {
         val iFindDataInRoom = AppDataBase.getInstance(pContext, "ViewPagerDataList")
             ?.viewPagerListDataDao()?.findListDataStr(pPosition)
+        Log.d("GGGGGGGGG", iFindDataInRoom?.RawListDataStr.toString())
         if (iFindDataInRoom != null) {
-            iFindDataInRoom.RawListDataStr?.let { setRawDataToArrayList(it) }
+            iFindDataInRoom.RawListDataStr?.let {
+                setRawDataToArrayList(it, pTitleName)
+            }
         } else {
             mDataList.postValue(null)
         }

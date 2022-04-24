@@ -1,6 +1,9 @@
 package com.example.newtaipeizookotlin.fragments
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,7 +25,9 @@ class ListPageFragment :
     private var mIsNoData = false
     private var mPageState = true
     private var mLock = ReentrantLock()
+    private val mHandler = Handler(Looper.getMainLooper())
 
+    var mOriginPosition = -1
     var mApiPosition = -1
     var mPageTitle = ""
 
@@ -36,7 +41,7 @@ class ListPageFragment :
 
             }
 
-        }, requireContext(), "mPageTitle", mPageState, myApplication)
+        }, requireContext(), mPageTitle, mPageState, myApplication)
     }
 
 
@@ -53,7 +58,7 @@ class ListPageFragment :
         mDataBinding.mRecycleView.setOnScrollChangeListener { _, _, _, _, _ ->
             if (!mDataBinding.mRecycleView.canScrollVertically(1)) {
                 if (!mIsNoData) {
-                    mProgressDialogCustom?.show(parentFragmentManager, "")
+                    //  mProgressDialogCustom?.show(parentFragmentManager, "")
                 } else {
                     Toast.makeText(activity, "到底了", Toast.LENGTH_SHORT).show()
                 }
@@ -65,40 +70,41 @@ class ListPageFragment :
         }
 
 
-        mCallViewModel.getDataListObserver().observe(viewLifecycleOwner, { pCallData ->
-            if (pCallData != null) {
-                mListDataAdapter.setData(pCallData)
+        mCallViewModel.getDataListObserver().observe(viewLifecycleOwner) { pDataList ->
+            if (pDataList != null) {
+                mListDataAdapter.setData(pDataList)
                 mProgressDialogCustom?.dismiss()
             } else {
-                if (mLock.tryLock()) {
-                    try {
-                        //處理任務
-                        mLock.lock()
-                        callApiThread()
-                    } catch (e: Exception) {
-
-                    } finally {
-                        //釋放鎖
-                        mLock.unlock()
-                        setRoom(mApiPosition, this.requireContext())
-                    }
-                } else {
-                    //如果不能獲取鎖，則直接做其他事情
-                }
+//                if (mLock.tryLock()) {
+//                    try {
+//                        //處理任務
+//                        mLock.lock()
+//                        callApiThread()
+//                    } catch (e: Exception) {
+//
+//                    } finally {
+//                        //釋放鎖
+//                        mLock.unlock()
+//                        setRoom(mApiPosition, this.requireContext())
+//                    }
+//                } else {
+//                    //如果不能獲取鎖，則直接做其他事情
+//                }
+                mHandler.postDelayed({ callApiThread() }, 200)
+                mHandler.postDelayed({ setRoom(mOriginPosition, this.requireContext()) }, 2000)
             }
-        })
-
-        getRoom(mApiPosition, this.requireContext())
+        }
+        getRoom(mOriginPosition, this.requireContext())
 
         //callApiThread()
     }
 
     private fun callApiThread() {
-        Thread { mCallViewModel.mCallApi(mPageTitle, mApiPosition) }.start()
+        Thread { mCallViewModel.mCallApi(mPageTitle, (mApiPosition * 20) - 20) }.start()
     }
 
     private fun getRoom(pPosition: Int, pContext: Context) {
-        Thread { mCallViewModel.getViewPagerListDataRoom(pPosition, pContext) }.start()
+        Thread { mCallViewModel.getViewPagerListDataRoom(pPosition, pContext, mPageTitle) }.start()
     }
 
     private fun setRoom(pPosition: Int, pContext: Context) {

@@ -4,10 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.newtaipeizookotlin.datalist.ListData
 import com.example.newtaipeizookotlin.fragments.ListPageFragment
 import com.example.newtaipeizookotlin.tools.UtilCommonStr
-import java.util.ArrayList
 
 class ListViewPagerAdapter(
     mFragmentManager: FragmentManager,
@@ -16,7 +14,6 @@ class ListViewPagerAdapter(
 ) : FragmentStateAdapter(mFragmentManager, mLifecycle) {
 
     private val pCount = mCount
-    private var mListFragment = ListPageFragment()
 
     override fun getItemCount(): Int {
         return pCount
@@ -24,25 +21,27 @@ class ListViewPagerAdapter(
 
 
     override fun createFragment(position: Int): Fragment {
+        val pListFragment = ListPageFragment()
         val iApiIndex = position + 1
+        pListFragment.mOriginPosition = iApiIndex
         return if (iApiIndex <= 5) {
-            setCallAnimal()
-            mListFragment.mApiPosition = iApiIndex
-            mListFragment
+            setCallAnimal(pListFragment)
+            pListFragment.mApiPosition = iApiIndex
+            pListFragment
         } else {
-            setCallPlant()
-            mListFragment.mApiPosition = iApiIndex - 5
-            mListFragment
+            setCallPlant(pListFragment)
+            pListFragment.mApiPosition = iApiIndex - 5
+            pListFragment
         }
     }
 
 
-    private fun setCallAnimal() {
-        mListFragment.mPageTitle = UtilCommonStr.getInstance().mAnimal
+    private fun setCallAnimal(pListFragment: ListPageFragment) {
+        pListFragment.mPageTitle = UtilCommonStr.getInstance().mAnimal
     }
 
-    private fun setCallPlant() {
-        mListFragment.mPageTitle = UtilCommonStr.getInstance().mPlant
+    private fun setCallPlant(pListFragment: ListPageFragment) {
+        pListFragment.mPageTitle = UtilCommonStr.getInstance().mPlant
     }
 }
 

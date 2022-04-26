@@ -33,6 +33,9 @@ class ListViewPager : BaseFragment<ListviewpagerBinding>() {
                 lifecycle,
                 mViewPagerCount * 2
             )
+
+        //禁止滑動
+        mDataBinding.viewPager2.isUserInputEnabled = false
         mDataBinding.viewPager2.adapter = pListViewPagerAdapter
 
 

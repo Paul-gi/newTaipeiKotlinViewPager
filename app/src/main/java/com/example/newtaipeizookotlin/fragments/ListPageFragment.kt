@@ -1,9 +1,7 @@
 package com.example.newtaipeizookotlin.fragments
 
-import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -71,17 +69,8 @@ class ListPageFragment :
         }
 
 
-        mCallViewModel.getNeedCallApi().observe(viewLifecycleOwner) { pNeedCallApi ->
-            if (pNeedCallApi == true) {
-                callApiThread()
-            }
-        }
-
-
-        mCallViewModel.getNeedSetRoom().observe(viewLifecycleOwner) { pNeedSetRoom ->
-            if (pNeedSetRoom == true) {
-                setRoom(mOriginPosition, this.requireContext())
-            }
+        mCallViewModel.getNeedCallApi().observe(viewLifecycleOwner) {
+            callApiThread()
         }
 
 
@@ -93,19 +82,29 @@ class ListPageFragment :
                 callApiThread()
             }
         }
-        getRoom(mOriginPosition, this.requireContext())
+
+
+        //first action
+        getRoom()
     }
 
 
     private fun callApiThread() {
-        Thread { mCallViewModel.mCallApi(mPageTitle, (mApiPosition * 20) - 20) }.start()
+        mCallViewModel.mCallApi(
+            mPageTitle,
+            (mApiPosition * 20) - 20,
+            this.requireContext(),
+            mOriginPosition
+        )
     }
 
-    private fun getRoom(pPosition: Int, pContext: Context) {
-        Thread { mCallViewModel.getViewPagerListDataRoom(pPosition, pContext, mPageTitle) }.start()
-    }
-
-    private fun setRoom(pPosition: Int, pContext: Context) {
-        Thread { mCallViewModel.setViewPagerListDataRoom(pPosition, pContext) }.start()
+    private fun getRoom() {
+        Thread {
+            mCallViewModel.getViewPagerListDataRoom(
+                mOriginPosition,
+                this.requireContext(),
+                mPageTitle
+            )
+        }.start()
     }
 }

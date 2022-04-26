@@ -3,7 +3,6 @@
 package com.example.newtaipeizookotlin.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.newtaipeizookotlin.datalist.ListData
@@ -23,10 +22,6 @@ class ListPageCallViewModel : ViewModel() {
     private val mDataList: MutableLiveData<ArrayList<ListData>?> =
         MutableLiveData<ArrayList<ListData>?>()
     private val mIsNoData = MutableLiveData<Boolean>()
-    private val mRawData: MutableLiveData<String?> =
-        MutableLiveData<String?>()
-    private var mNeedSetRoom: MutableLiveData<Boolean> =
-        MutableLiveData<Boolean>()
     private var mNeedCallApi: MutableLiveData<Boolean> =
         MutableLiveData<Boolean>()
 
@@ -43,23 +38,16 @@ class ListPageCallViewModel : ViewModel() {
         return mDataList
     }
 
-    fun getRawDataObserver(): MutableLiveData<String?> {
-        return mRawData
-    }
 
     fun getDataFinishState(): MutableLiveData<Boolean> {
         return mIsNoData
-    }
-
-    fun getNeedSetRoom(): MutableLiveData<Boolean> {
-        return mNeedSetRoom
     }
 
     fun getNeedCallApi(): MutableLiveData<Boolean> {
         return mNeedCallApi
     }
 
-    fun mCallApi(pTitleName: String, pPosition: Int) {
+    fun mCallApi(pTitleName: String, pPosition: Int, pContext: Context, pOriginPosition: Int) {
         val iDataMax = 20
         mPageTitle = pTitleName
         if (mNotMoreData) {
@@ -94,7 +82,6 @@ class ListPageCallViewModel : ViewModel() {
                     val iRawData = response.body().toString()
                     mRawDataStr = iRawData
                     val iListData = setRawDataToArrayList(mRawDataStr, pTitleName)
-                    mNeedSetRoom.postValue(true)
                     if (iListData.size == iDataMax) {
                         mIndex += iDataMax
                     } else {
@@ -102,6 +89,7 @@ class ListPageCallViewModel : ViewModel() {
                         mIsNoData.postValue(true)
                     }
                     mGettingData = false
+                    Thread { setViewPagerListDataRoom(pOriginPosition, pContext) }.start()
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }

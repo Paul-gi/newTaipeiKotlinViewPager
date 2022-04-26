@@ -25,7 +25,10 @@ class ListPageCallViewModel : ViewModel() {
     private val mIsNoData = MutableLiveData<Boolean>()
     private val mRawData: MutableLiveData<String?> =
         MutableLiveData<String?>()
-
+    private var mNeedSetRoom: MutableLiveData<Boolean> =
+        MutableLiveData<Boolean>()
+    private var mNeedCallApi: MutableLiveData<Boolean> =
+        MutableLiveData<Boolean>()
 
     private var mIndex = 0
     private var mNotMoreData = false
@@ -48,6 +51,13 @@ class ListPageCallViewModel : ViewModel() {
         return mIsNoData
     }
 
+    fun getNeedSetRoom(): MutableLiveData<Boolean> {
+        return mNeedSetRoom
+    }
+
+    fun getNeedCallApi(): MutableLiveData<Boolean> {
+        return mNeedCallApi
+    }
 
     fun mCallApi(pTitleName: String, pPosition: Int) {
         val iDataMax = 20
@@ -84,11 +94,7 @@ class ListPageCallViewModel : ViewModel() {
                     val iRawData = response.body().toString()
                     mRawDataStr = iRawData
                     val iListData = setRawDataToArrayList(mRawDataStr, pTitleName)
-
-//                    if( iListData.isNotEmpty()) {
-//                        mRawData.postValue(iRawData)
-//                    }
-
+                    mNeedSetRoom.postValue(true)
                     if (iListData.size == iDataMax) {
                         mIndex += iDataMax
                     } else {
@@ -110,7 +116,6 @@ class ListPageCallViewModel : ViewModel() {
 
     fun setRawDataToArrayList(iRawData: String, pTitleName: String): ArrayList<ListData> {
         val iListData: ArrayList<ListData> = ArrayList()
-        Log.d("GGGGG", iRawData)
         val ix = JSONObject(iRawData)
         val iz = ix.getJSONObject("result").getJSONArray("results")
         for (i in 0 until iz.length()) {
@@ -133,8 +138,6 @@ class ListPageCallViewModel : ViewModel() {
             ViewPagerListData().apply {
                 FragmentPageCode = pPosition
                 RawListDataStr = mRawDataStr
-                Log.d("GGGGG", "FragmentPageCode = " + FragmentPageCode.toString())
-                Log.d("GGGGG", "RawListDataStr = " + RawListDataStr.toString())
             }
         )
     }
@@ -143,10 +146,13 @@ class ListPageCallViewModel : ViewModel() {
     fun getViewPagerListDataRoom(pPosition: Int, pContext: Context, pTitleName: String) {
         val iFindDataInRoom = AppDataBase.getInstance(pContext, "ViewPagerDataList")
             ?.viewPagerListDataDao()?.findListDataStr(pPosition)
-        Log.d("GGGGGGGGG", iFindDataInRoom?.RawListDataStr.toString())
         if (iFindDataInRoom != null) {
             iFindDataInRoom.RawListDataStr?.let {
-                setRawDataToArrayList(it, pTitleName)
+                if (it == "") {
+                    mNeedCallApi.postValue(true)
+                } else {
+                    setRawDataToArrayList(it, pTitleName)
+                }
             }
         } else {
             mDataList.postValue(null)

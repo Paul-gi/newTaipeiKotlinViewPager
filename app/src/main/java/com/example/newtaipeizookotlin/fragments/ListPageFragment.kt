@@ -65,8 +65,23 @@ class ListPageFragment :
             }
         }
 
+
         mCallViewModel.getDataFinishState().observe(viewLifecycleOwner) { aBoolean ->
             mIsNoData = aBoolean
+        }
+
+
+        mCallViewModel.getNeedCallApi().observe(viewLifecycleOwner) { pNeedCallApi ->
+            if (pNeedCallApi == true) {
+                callApiThread()
+            }
+        }
+
+
+        mCallViewModel.getNeedSetRoom().observe(viewLifecycleOwner) { pNeedSetRoom ->
+            if (pNeedSetRoom == true) {
+                setRoom(mOriginPosition, this.requireContext())
+            }
         }
 
 
@@ -75,29 +90,12 @@ class ListPageFragment :
                 mListDataAdapter.setData(pDataList)
                 mProgressDialogCustom?.dismiss()
             } else {
-//                if (mLock.tryLock()) {
-//                    try {
-//                        //處理任務
-//                        mLock.lock()
-//                        callApiThread()
-//                    } catch (e: Exception) {
-//
-//                    } finally {
-//                        //釋放鎖
-//                        mLock.unlock()
-//                        setRoom(mApiPosition, this.requireContext())
-//                    }
-//                } else {
-//                    //如果不能獲取鎖，則直接做其他事情
-//                }
-                mHandler.postDelayed({ callApiThread() }, 200)
-                mHandler.postDelayed({ setRoom(mOriginPosition, this.requireContext()) }, 2000)
+                callApiThread()
             }
         }
         getRoom(mOriginPosition, this.requireContext())
-
-        //callApiThread()
     }
+
 
     private fun callApiThread() {
         Thread { mCallViewModel.mCallApi(mPageTitle, (mApiPosition * 20) - 20) }.start()

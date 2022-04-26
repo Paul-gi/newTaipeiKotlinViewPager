@@ -241,7 +241,6 @@ class DetailPageFragment : BaseFragment<MainDetailFragmentBinding>() {
         mCallDetail.enqueue(object : Callback<JsonObject?> {
             override fun onResponse(call: Call<JsonObject?>, response: Response<JsonObject?>) {
                 try {
-                    Log.d("GGG", "GGG1")
                     val iListData: ArrayList<ListData> = ArrayList()
                     assert(response.body() != null)
                     val ix = JSONObject(response.body().toString())
@@ -251,16 +250,12 @@ class DetailPageFragment : BaseFragment<MainDetailFragmentBinding>() {
                     iData.selectType(mPageTitleStr, false)
                     iListData.add(iData)
 
-                    Log.d("GGG", iData.toString())
-
                     mListData.setRawJson(mPageTitleStr, iListData[0].getRawData())
                     setRoom()
                     initSelectView()
                     mProgressDialogCustom?.dismiss()
 
                 } catch (e: JSONException) {
-                    Log.d("GGG", "ESX$e")
-
                     e.printStackTrace()
                     if (e.toString() == "org.json.JSONException: Index 0 out of range [0..0)") {
                         Log.d("FirebaseFcmErrorMessage", e.toString())

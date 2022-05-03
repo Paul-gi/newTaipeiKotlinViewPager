@@ -7,28 +7,86 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".MainActivity">
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ExpandBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tabLayout"
+            app:layout_constraintLeft_toRightOf="@+id/tabLayout"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tabLayout"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/tv_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收起"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ExpandBtn"
+                app:layout_constraintLeft_toLeftOf="@+id/ExpandBtn"
+                app:layout_constraintRight_toLeftOf="@+id/iv_arrow"
+                app:layout_constraintTop_toTopOf="@+id/ExpandBtn"
+                tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="3dp"
+                android:src="@mipmap/ic_arrow_down"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_tip"
+                app:layout_constraintLeft_toRightOf="@+id/tv_tip"
+                app:layout_constraintRight_toRightOf="@+id/ExpandBtn"
+                app:layout_constraintTop_toTopOf="@+id/tv_tip"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
             android:id="@+id/tabLayout"
-            app:tabMode="scrollable"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/ExpandBtn"
+            app:layout_constraintTop_toTopOf="parent"
             app:tabGravity="fill"
-            app:tabIndicatorGravity="stretch"
-            app:tabSelectedTextColor="@color/white"
+            app:tabIndicator="@drawable/tab_indicator"
             app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicator="@drawable/tab_indicator" />
+            app:tabIndicatorGravity="stretch"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/white"
+            tools:ignore="MissingConstraints" />
 
         <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/viewPager2" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
+        <include
+            android:id="@+id/mExpandRecycleView"
+            layout="@layout/expandrecyclew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

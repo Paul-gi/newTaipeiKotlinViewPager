@@ -17,7 +17,8 @@ class GoogleMapItemAdapter : RecyclerView.Adapter<GoogleMapItemAdapter.MyViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(
-        pLocationList: ArrayList<LocationPositionData>?, pMapViewRecycleViewClickListener: MapViewRecycleViewClickListener?
+        pLocationList: ArrayList<LocationPositionData>?,
+        pMapViewRecycleViewClickListener: MapViewRecycleViewClickListener?
     ) {
         mMapViewRecycleViewClickListener = pMapViewRecycleViewClickListener
         mLocationDataList.clear()

@@ -187,7 +187,7 @@ open class MainActivity : AppCompatActivity() {
                 PendingIntent.getBroadcast(
                     this,
                     0,
-                    it, PendingIntent.FLAG_UPDATE_CURRENT
+                    it, PendingIntent.FLAG_IMMUTABLE
                 )
             }
 

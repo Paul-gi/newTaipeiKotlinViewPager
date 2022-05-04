@@ -16,8 +16,7 @@ import com.example.newtaipeizookotlin.fragments.BaseFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
-class ListViewPager : BaseFragment<ListviewpagerBinding>(),
-    ExpandAdapter.ExpandRecycleViewClickListener {
+class ListViewPager : BaseFragment<ListviewpagerBinding>(),ExpandAdapter.ExpandRecycleViewClickListener {
     override val mLayout: Int
         get() = R.layout.listviewpager
 
@@ -90,7 +89,7 @@ class ListViewPager : BaseFragment<ListviewpagerBinding>(),
         val iGridLayoutManager = GridLayoutManager(this.requireContext(), 3)
         mDataBinding.mExpandRecycleView.mExpandRecycleView.layoutManager = iGridLayoutManager
         mDataBinding.mExpandRecycleView.mExpandRecycleView.adapter = pExpandAdapter
-        pExpandAdapter.setData(mExpandArrayList, this)
+        pExpandAdapter.setData(mExpandArrayList,this)
 //        pExpandAdapter.setData(mExpandArrayList)
 
 
@@ -116,10 +115,27 @@ class ListViewPager : BaseFragment<ListviewpagerBinding>(),
     }
 
     override fun onViewClicked(position: Int) {
-        mDataBinding.viewPager2.currentItem = position
+       // mDataBinding.tabLayout.performClick()
 
-        mDataBinding.tabLayout.selectTab(mDataBinding.tabLayout.getTabAt(position))
+        mDataBinding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                mDataBinding.viewPager2.currentItem = position
+            }
 
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+        })
+
+        mDataBinding.viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                mDataBinding.tabLayout.selectTab(mDataBinding.tabLayout.getTabAt(position))
+            }
+        })
 
     }
 }

@@ -3,14 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.39166666666666666" />
-        <entry key="app/src/main/res/layout/all_area_navigation.xml" value="0.39166666666666666" />
-        <entry key="app/src/main/res/layout/animal_detail.xml" value="0.39166666666666666" />
-        <entry key="app/src/main/res/layout/department_selectpage_fragment.xml" value="0.39166666666666666" />
-        <entry key="app/src/main/res/layout/detail_below_part.xml" value="0.39166666666666666" />
-        <entry key="app/src/main/res/layout/expanditem.xml" value="0.39166666666666666" />
-        <entry key="app/src/main/res/layout/expandrecyclew.xml" value="0.39166666666666666" />
-        <entry key="app/src/main/res/layout/listviewpager.xml" value="0.28827053326475766" />
+        <entry key="..\:/Users/L/Documents/newTaipeiKotlinViewPager/app/src/main/res/layout/expanditem.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/L/Documents/newTaipeiKotlinViewPager/app/src/main/res/layout/googlemap_recycleview_utem.xml" value="0.17806484295845998" />
       </map>
     </option>
   </component>

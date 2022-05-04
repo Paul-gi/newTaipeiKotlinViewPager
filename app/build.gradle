@@ -11,20 +11,20 @@ android {
     }
 }
 android {
-    signingConfigs {
-        release {
-            storeFile file('/Users/giiiii/Desktop/zoo')
-            storePassword '963852'
-            keyAlias 'zoo'
-            keyPassword '963852'
-        }
-        debug {
-            storeFile file('/Users/giiiii/Desktop/zoo')
-            storePassword '963852'
-            keyAlias 'zoo'
-            keyPassword '963852'
-        }
-    }
+//    signingConfigs {
+//        release {
+//            storeFile file('/Users/giiiii/Desktop/zoo')
+//            storePassword '963852'
+//            keyAlias 'zoo'
+//            keyPassword '963852'
+//        }
+//        debug {
+//            storeFile file('/Users/giiiii/Desktop/zoo')
+//            storePassword '963852'
+//            keyAlias 'zoo'
+//            keyPassword '963852'
+//        }
+//    }
     compileSdk 31
 
     defaultConfig {

@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\department_detail.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\department_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\detail_below_part.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\detail_below_part.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\plant_detail.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\plant_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\all_area_navigation.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\all_area_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\animal_detail.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\animal_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\webview_activity.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\webview_activity.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\home_fragment.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\home_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\listviewpager.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\listviewpager.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\list_page_fragment.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\list_page_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\expandrecyclew.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\expandrecyclew.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\expanditem.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\expanditem.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\department_selectpage_fragment.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\department_selectpage_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\google_map_fragment.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\google_map_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\toolbar_layout.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\toolbar_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\main_detail_fragment.xml",
+        "source": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\src\\main\\res\\layout\\main_detail_fragment.xml"
+    }
+]

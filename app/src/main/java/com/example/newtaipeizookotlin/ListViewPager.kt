@@ -1,17 +1,12 @@
 package com.example.newtaipeizookotlin
 
 import android.animation.ObjectAnimator
-import android.util.Log
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
-import androidx.viewpager2.widget.ViewPager2.GONE
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.newtaipeizookotlin.adapter.ExpandAdapter
 import com.example.newtaipeizookotlin.adapter.ListViewPagerAdapter
 import com.example.newtaipeizookotlin.databinding.ListviewpagerBinding
-import com.example.newtaipeizookotlin.datalist.ExpandListData
 import com.example.newtaipeizookotlin.fragments.BaseFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -87,12 +82,11 @@ class ListViewPager : BaseFragment<ListviewpagerBinding>(),ExpandAdapter.ExpandR
 
         val pExpandAdapter = ExpandAdapter()
         val iGridLayoutManager = GridLayoutManager(this.requireContext(), 3)
+        pExpandAdapter.setData(mExpandArrayList,this)
+
+
         mDataBinding.mExpandRecycleView.mExpandRecycleView.layoutManager = iGridLayoutManager
         mDataBinding.mExpandRecycleView.mExpandRecycleView.adapter = pExpandAdapter
-        pExpandAdapter.setData(mExpandArrayList,this)
-//        pExpandAdapter.setData(mExpandArrayList)
-
-
     }
 
 
@@ -115,27 +109,7 @@ class ListViewPager : BaseFragment<ListviewpagerBinding>(),ExpandAdapter.ExpandR
     }
 
     override fun onViewClicked(position: Int) {
-       // mDataBinding.tabLayout.performClick()
-
-        mDataBinding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                mDataBinding.viewPager2.currentItem = position
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
-        })
-
-        mDataBinding.viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                mDataBinding.tabLayout.selectTab(mDataBinding.tabLayout.getTabAt(position))
-            }
-        })
-
+        mDataBinding.viewPager2.currentItem = position
+        mDataBinding.tabLayout.selectTab(mDataBinding.tabLayout.getTabAt(position))
     }
 }

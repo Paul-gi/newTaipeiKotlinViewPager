@@ -1,0 +1,89 @@
+com/example/newtaipeizookotlin/databinding/AnimalDetailBinding.java
+ com.example.newtaipeizookotlin.databinding.AnimalDetailBinding
+com/example/newtaipeizookotlin/databinding/ExpanditemBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.ExpanditemBindingImpl
+com/example/newtaipeizookotlin/databinding/ListPageFragmentBinding.java
+ com.example.newtaipeizookotlin.databinding.ListPageFragmentBinding
+com/example/newtaipeizookotlin/BuildConfig.java
+ com.example.newtaipeizookotlin.BuildConfig
+com/example/newtaipeizookotlin/databinding/ExpandrecyclewBinding.java
+ com.example.newtaipeizookotlin.databinding.ExpandrecyclewBinding
+com/example/newtaipeizookotlin/databinding/MainDetailFragmentBinding.java
+ com.example.newtaipeizookotlin.databinding.MainDetailFragmentBinding
+com/example/newtaipeizookotlin/databinding/GoogleMapFragmentBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.GoogleMapFragmentBindingImpl
+androidx/databinding/DataBinderMapperImpl.java
+ androidx.databinding.DataBinderMapperImpl
+com/example/newtaipeizookotlin/databinding/AllAreaNavigationBinding.java
+ com.example.newtaipeizookotlin.databinding.AllAreaNavigationBinding
+com/example/newtaipeizookotlin/databinding/ExpanditemBinding.java
+ com.example.newtaipeizookotlin.databinding.ExpanditemBinding
+androidx/databinding/library/baseAdapters/BR.java
+ androidx.databinding.library.baseAdapters.BR
+com/example/newtaipeizookotlin/databinding/DepartmentDetailBinding.java
+ com.example.newtaipeizookotlin.databinding.DepartmentDetailBinding
+com/example/newtaipeizookotlin/databinding/DepartmentDetailBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.DepartmentDetailBindingImpl
+com/example/newtaipeizookotlin/DataBinderMapperImpl.java
+ com.example.newtaipeizookotlin.DataBinderMapperImpl
+ com.example.newtaipeizookotlin.DataBinderMapperImpl$InnerBrLookup
+ com.example.newtaipeizookotlin.DataBinderMapperImpl$InnerLayoutIdLookup
+com/example/newtaipeizookotlin/databinding/WebviewActivityBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.WebviewActivityBindingImpl
+com/example/newtaipeizookotlin/DataBindingTriggerClass.java
+ com.example.newtaipeizookotlin.DataBindingTriggerClass
+com/example/newtaipeizookotlin/databinding/HomeFragmentBinding.java
+ com.example.newtaipeizookotlin.databinding.HomeFragmentBinding
+com/example/newtaipeizookotlin/databinding/PlantDetailBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.PlantDetailBindingImpl
+com/example/newtaipeizookotlin/databinding/AnimalDetailBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.AnimalDetailBindingImpl
+com/example/newtaipeizookotlin/databinding/ListviewpagerBinding.java
+ com.example.newtaipeizookotlin.databinding.ListviewpagerBinding
+com/example/newtaipeizookotlin/databinding/WebviewActivityBinding.java
+ com.example.newtaipeizookotlin.databinding.WebviewActivityBinding
+com/example/newtaipeizookotlin/databinding/ExpandrecyclewBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.ExpandrecyclewBindingImpl
+com/example/newtaipeizookotlin/databinding/GoogleMapFragmentBinding.java
+ com.example.newtaipeizookotlin.databinding.GoogleMapFragmentBinding
+com/example/newtaipeizookotlin/databinding/AllAreaNavigationBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.AllAreaNavigationBindingImpl
+com/example/newtaipeizookotlin/databinding/HomeFragmentBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.HomeFragmentBindingImpl
+com/example/newtaipeizookotlin/databinding/DetailBelowPartBinding.java
+ com.example.newtaipeizookotlin.databinding.DetailBelowPartBinding
+com/example/newtaipeizookotlin/room/ViewPagerListDataDao_Impl.java
+ com.example.newtaipeizookotlin.room.ViewPagerListDataDao_Impl
+ com.example.newtaipeizookotlin.room.ViewPagerListDataDao_Impl$1
+com/example/newtaipeizookotlin/databinding/ListviewpagerBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.ListviewpagerBindingImpl
+com/example/newtaipeizookotlin/room/UserDao_Impl.java
+ com.example.newtaipeizookotlin.room.UserDao_Impl
+ com.example.newtaipeizookotlin.room.UserDao_Impl$1
+com/example/newtaipeizookotlin/databinding/DetailBelowPartBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.DetailBelowPartBindingImpl
+com/example/newtaipeizookotlin/databinding/PlantDetailBinding.java
+ com.example.newtaipeizookotlin.databinding.PlantDetailBinding
+com/example/newtaipeizookotlin/databinding/MainDetailFragmentBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.MainDetailFragmentBindingImpl
+com/example/newtaipeizookotlin/databinding/ActivityMainBinding.java
+ com.example.newtaipeizookotlin.databinding.ActivityMainBinding
+com/example/newtaipeizookotlin/databinding/ToolbarLayoutBinding.java
+ com.example.newtaipeizookotlin.databinding.ToolbarLayoutBinding
+com/example/newtaipeizookotlin/databinding/ListPageFragmentBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.ListPageFragmentBindingImpl
+com/example/newtaipeizookotlin/databinding/ActivityMainBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.ActivityMainBindingImpl
+com/example/newtaipeizookotlin/databinding/DepartmentSelectpageFragmentBinding.java
+ com.example.newtaipeizookotlin.databinding.DepartmentSelectpageFragmentBinding
+com/example/newtaipeizookotlin/room/AppDataBase_Impl.java
+ com.example.newtaipeizookotlin.room.AppDataBase_Impl
+ com.example.newtaipeizookotlin.room.AppDataBase_Impl$1
+com/example/newtaipeizookotlin/BR.java
+ com.example.newtaipeizookotlin.BR
+com/example/newtaipeizookotlin/databinding/ToolbarLayoutBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.ToolbarLayoutBindingImpl
+com/example/newtaipeizookotlin/databinding/DepartmentSelectpageFragmentBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.DepartmentSelectpageFragmentBindingImpl
+androidx/databinding/DataBindingComponent.java
+ androidx.databinding.DataBindingComponent

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">36531021136-fe7k11c6haoeipgjamcnkf2q56agt3qv.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">36531021136</string>
+    <string name="google_api_key" translatable="false">AIzaSyACfokwPTY4IgKParNS8Kb35e8cowsESIk</string>
+    <string name="google_app_id" translatable="false">1:36531021136:android:8aefd0f046780aa8077855</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyACfokwPTY4IgKParNS8Kb35e8cowsESIk</string>
+    <string name="google_storage_bucket" translatable="false">newtaipeizookotlin.appspot.com</string>
+    <string name="project_id" translatable="false">newtaipeizookotlin</string>
+</resources>

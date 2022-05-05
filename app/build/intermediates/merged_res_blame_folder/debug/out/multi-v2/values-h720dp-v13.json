@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\L\\Documents\\newTaipeiKotlinViewPager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+            "outputFile": "/Users/giiiii/newTaipeiKotlinViewPager/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\L\\.gradle\\caches\\transforms-3\\b20245ede4944b6cac8ced8580696b7b\\transformed\\appcompat-1.4.1\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "source": "/Users/giiiii/.gradle/caches/transforms-3/b20245ede4944b6cac8ced8580696b7b/transformed/appcompat-1.4.1/res/values-h720dp-v13/values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

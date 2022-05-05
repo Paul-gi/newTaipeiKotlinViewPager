@@ -108,8 +108,9 @@ class ListViewPager : BaseFragment<ListviewpagerBinding>(),ExpandAdapter.ExpandR
         }
     }
 
-    override fun onViewClicked(position: Int) {
+    override fun onViewClicked(position: Int):Int {
         mDataBinding.viewPager2.currentItem = position
         mDataBinding.tabLayout.selectTab(mDataBinding.tabLayout.getTabAt(position))
+        return  position
     }
 }

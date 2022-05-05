@@ -70,17 +70,17 @@ com/example/newtaipeizookotlin/databinding/ActivityMainBinding.java
  com.example.newtaipeizookotlin.databinding.ActivityMainBinding
 com/example/newtaipeizookotlin/databinding/ToolbarLayoutBinding.java
  com.example.newtaipeizookotlin.databinding.ToolbarLayoutBinding
-com/example/newtaipeizookotlin/databinding/ListPageFragmentBindingImpl.java
- com.example.newtaipeizookotlin.databinding.ListPageFragmentBindingImpl
 com/example/newtaipeizookotlin/databinding/ActivityMainBindingImpl.java
  com.example.newtaipeizookotlin.databinding.ActivityMainBindingImpl
+com/example/newtaipeizookotlin/databinding/ListPageFragmentBindingImpl.java
+ com.example.newtaipeizookotlin.databinding.ListPageFragmentBindingImpl
 com/example/newtaipeizookotlin/databinding/DepartmentSelectpageFragmentBinding.java
  com.example.newtaipeizookotlin.databinding.DepartmentSelectpageFragmentBinding
+com/example/newtaipeizookotlin/BR.java
+ com.example.newtaipeizookotlin.BR
 com/example/newtaipeizookotlin/room/AppDataBase_Impl.java
  com.example.newtaipeizookotlin.room.AppDataBase_Impl
  com.example.newtaipeizookotlin.room.AppDataBase_Impl$1
-com/example/newtaipeizookotlin/BR.java
- com.example.newtaipeizookotlin.BR
 com/example/newtaipeizookotlin/databinding/ToolbarLayoutBindingImpl.java
  com.example.newtaipeizookotlin.databinding.ToolbarLayoutBindingImpl
 com/example/newtaipeizookotlin/databinding/DepartmentSelectpageFragmentBindingImpl.java

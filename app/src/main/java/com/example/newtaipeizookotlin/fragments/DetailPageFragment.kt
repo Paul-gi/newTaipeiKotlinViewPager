@@ -44,7 +44,6 @@ class DetailPageFragment : BaseFragment<MainDetailFragmentBinding>() {
 
 
     override fun initView() {
-        super.initView()
         if (mFromFirebase) {
             callDetailApi()
         } else {

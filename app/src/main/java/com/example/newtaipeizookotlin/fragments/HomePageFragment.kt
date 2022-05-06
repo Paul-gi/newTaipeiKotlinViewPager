@@ -13,7 +13,6 @@ class HomePageFragment : BaseFragment<HomeFragmentBinding>() {
     private var mFcmFromDepartment = false
 
     override fun initView() {
-        super.initView()
         getBundle()
 
         if (mFcmFromDepartment) {

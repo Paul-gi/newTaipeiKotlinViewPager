@@ -1,6 +1,8 @@
 package com.example.newtaipeizookotlin
 
 import android.animation.ObjectAnimator
+import android.os.Looper
+import android.util.Log
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -10,15 +12,21 @@ import com.example.newtaipeizookotlin.databinding.ListviewpagerBinding
 import com.example.newtaipeizookotlin.fragments.BaseFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import androidx.viewpager2.widget.ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
 
-class ListViewPager : BaseFragment<ListviewpagerBinding>(),ExpandAdapter.ExpandRecycleViewClickListener {
+
+class ListViewPager : BaseFragment<ListviewpagerBinding>(),
+    ExpandAdapter.ExpandRecycleViewClickListener {
     override val mLayout: Int
         get() = R.layout.listviewpager
 
     private var mViewPagerCount = 5
     private var mExpandArrayList = ArrayList<String>()
 
+    private var mIsScrollEnable = false
+
     override fun initView() {
+
 
         mDataBinding.ExpandBtn.setOnClickListener {
             val toggle = mDataBinding.mExpandRecycleView.mExpandRecycleViewMain.toggle()
@@ -54,40 +62,58 @@ class ListViewPager : BaseFragment<ListviewpagerBinding>(),ExpandAdapter.ExpandR
                 mViewPagerCount * 2
             )
 
+
+        mDataBinding.viewPager2.offscreenPageLimit = OFFSCREEN_PAGE_LIMIT_DEFAULT
         //禁止滑動
-        mDataBinding.viewPager2.isUserInputEnabled = false
+        mDataBinding.viewPager2.isUserInputEnabled = mIsScrollEnable
         mDataBinding.viewPager2.adapter = pListViewPagerAdapter
 
 
 
         mDataBinding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                mDataBinding.viewPager2.currentItem = tab.position
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.position?.let {
+                    Log.v("aaa","onTab Selected = $it")
+                    mDataBinding.viewPager2.currentItem = it
+                    pListViewPagerAdapter.setApiFlag(it)
+                }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                Log.v("aaa","onTab Unselected = ${tab?.position}")
             }
 
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                Log.v("aaa","onTab Reselected = ${tab?.position}")
+                tab?.position?.let {
+                    pListViewPagerAdapter.setApiFlag(it)
+                }
             }
+
         })
 
         mDataBinding.viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                mDataBinding.tabLayout.selectTab(mDataBinding.tabLayout.getTabAt(position))
+                Log.v("aaa","onPageSelected = $position")
+                if( mIsScrollEnable) {
+                    mDataBinding.tabLayout.selectTab(mDataBinding.tabLayout.getTabAt(position))
+                }
             }
         })
 
         val pExpandAdapter = ExpandAdapter()
         val iGridLayoutManager = GridLayoutManager(this.requireContext(), 3)
-        pExpandAdapter.setData(mExpandArrayList,this)
+        pExpandAdapter.setData(mExpandArrayList, this)
 
 
         mDataBinding.mExpandRecycleView.mExpandRecycleView.layoutManager = iGridLayoutManager
         mDataBinding.mExpandRecycleView.mExpandRecycleView.adapter = pExpandAdapter
+
+        android.os.Handler(Looper.getMainLooper()).postDelayed({
+            mDataBinding.tabLayout.selectTab(mDataBinding.tabLayout.getTabAt(0))
+        }, 250)
     }
+
 
 
     /**
@@ -108,9 +134,9 @@ class ListViewPager : BaseFragment<ListviewpagerBinding>(),ExpandAdapter.ExpandR
         }
     }
 
-    override fun onViewClicked(position: Int):Int {
+    override fun onViewClicked(position: Int): Int {
         mDataBinding.viewPager2.currentItem = position
         mDataBinding.tabLayout.selectTab(mDataBinding.tabLayout.getTabAt(position))
-        return  position
+        return position
     }
 }

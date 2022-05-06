@@ -12,7 +12,6 @@ class WebViewFragment:BaseFragment<WebviewActivityBinding>(){
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun initView() {
-        super.initView()
         getBundle()
        mDataBinding.mWebView.run {
             settings.javaScriptEnabled = true

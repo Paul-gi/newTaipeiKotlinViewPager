@@ -2,6 +2,7 @@ package com.example.newtaipeizookotlin.fragments
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,9 +26,22 @@ class ListPageFragment :
     private var mLock = ReentrantLock()
     private val mHandler = Handler(Looper.getMainLooper())
 
+    private val mListData = ArrayList<ListData>()
+
     var mOriginPosition = -1
     var mApiPosition = -1
     var mPageTitle = ""
+    var mCanCallApiFlag = false
+
+    fun setApiFlag() {
+        Log.d("aaa","ListPageFragment setApiFlag $mOriginPosition.")
+        mCanCallApiFlag = true
+    }
+
+    fun callApiFromAdapter() {
+        callApiThread()
+    }
+
 
     private val mCallViewModel: ListPageCallViewModel by lazy {
         ViewModelProvider(this).get(ListPageCallViewModel::class.java)
@@ -44,7 +58,7 @@ class ListPageFragment :
 
 
     override fun initView() {
-        super.initView()
+        Log.d("aaa","ListPageFragment initView = $mOriginPosition")
         mLinearLayoutManager = LinearLayoutManager(this.activity)
         mGridLayoutManager = GridLayoutManager(activity, 2)
         mDataBinding.mRecycleView.layoutManager = mLinearLayoutManager
@@ -75,12 +89,11 @@ class ListPageFragment :
 
 
         mCallViewModel.getDataListObserver().observe(viewLifecycleOwner) { pDataList ->
-            if (pDataList != null) {
-                mListDataAdapter.setData(pDataList)
-                mProgressDialogCustom?.dismiss()
-            } else {
-                callApiThread()
+            pDataList?.let {
+                mListData.addAll(it)
             }
+
+            callApiThread()
         }
 
 
@@ -90,12 +103,25 @@ class ListPageFragment :
 
 
     private fun callApiThread() {
-        mCallViewModel.mCallApi(
-            mPageTitle,
-            (mApiPosition * 20) - 20,
-            this.requireContext(),
-            mOriginPosition
-        )
+        Log.d("aaa","ListPageFragment callApiThread = $mCanCallApiFlag, mListData=${mListData.isNotEmpty()}, position=$mOriginPosition")
+        if (mListData.isNotEmpty()) {
+            Log.d("aaa","ListPageFragment callApiThread uses old data, position=$mOriginPosition")
+            mListDataAdapter.setData(mListData)
+            mProgressDialogCustom?.dismiss()
+            return
+        }
+
+
+        if( mCanCallApiFlag) {
+            Log.d("aaa","ListPageFragment callApiThread call api now, position=$mOriginPosition")
+            showProgress()
+            mCallViewModel.mCallApi(
+                mPageTitle,
+                (mApiPosition * 20) - 20,
+                this.requireContext(),
+                mOriginPosition
+            )
+        }
     }
 
     private fun getRoom() {

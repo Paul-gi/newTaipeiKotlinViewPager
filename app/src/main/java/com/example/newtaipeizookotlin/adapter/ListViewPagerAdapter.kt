@@ -1,5 +1,6 @@
 package com.example.newtaipeizookotlin.adapter
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -14,6 +15,9 @@ class ListViewPagerAdapter(
 ) : FragmentStateAdapter(mFragmentManager, mLifecycle) {
 
     private val pCount = mCount
+    private val mFragment = hashMapOf<Int, ListPageFragment>()
+    private var mSelected = -1
+
 
     override fun getItemCount(): Int {
         return pCount
@@ -21,18 +25,30 @@ class ListViewPagerAdapter(
 
 
     override fun createFragment(position: Int): Fragment {
-        val pListFragment = ListPageFragment()
+        val iListFragment = ListPageFragment()
+        mFragment[position] = iListFragment
         val iApiIndex = position + 1
-        pListFragment.mOriginPosition = iApiIndex
-        return if (iApiIndex <= 5) {
-            setCallAnimal(pListFragment)
-            pListFragment.mApiPosition = iApiIndex
-            pListFragment
-        } else {
-            setCallPlant(pListFragment)
-            pListFragment.mApiPosition = iApiIndex - 5
-            pListFragment
+        Log.v("aaa","createFragment position = $position, mSelected = $mSelected")
+        Log.v("aaa","createFragment fragment is ${mFragment[position]}")
+        Log.v("aaa","createFragment fragment parent is ${mFragment[position]?.activity}.")
+
+        iListFragment.mOriginPosition = position
+
+        if( mSelected == position) {
+            iListFragment.setApiFlag()
         }
+
+        return if (iApiIndex <= 5) {
+            setCallAnimal(iListFragment)
+            iListFragment.mApiPosition = iApiIndex
+            iListFragment
+        } else {
+            setCallPlant(iListFragment)
+            iListFragment.mApiPosition = iApiIndex - 5
+            iListFragment
+        }
+
+
     }
 
 
@@ -42,6 +58,19 @@ class ListViewPagerAdapter(
 
     private fun setCallPlant(pListFragment: ListPageFragment) {
         pListFragment.mPageTitle = UtilCommonStr.getInstance().mPlant
+    }
+
+    fun setApiFlag(pPosition: Int) {
+        Log.v("aaa","setApiFlag = $pPosition")
+        Log.v("aaa","setApiFlag fragment is ${mFragment[pPosition]}.")
+        Log.v("aaa","setApiFlag fragment parent is ${mFragment[pPosition]?.activity}.")
+        mSelected = pPosition
+        mFragment[pPosition]?.let {
+            mFragment[pPosition]?.setApiFlag()
+            if( it.activity != null) {
+                mFragment[pPosition]?.callApiFromAdapter()
+            }
+        }
     }
 }
 

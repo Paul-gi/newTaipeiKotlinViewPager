@@ -57,11 +57,11 @@ abstract class BaseFragment<dataBinding : ViewDataBinding> : Fragment() {
         return iDataBinding.root
     }
 
-    protected open fun initView() {
+    fun showProgress() {
         mProgressDialogCustom = ProgressDialogCustom(requireContext())
         mProgressDialogCustom?.show(parentFragmentManager, "")
-        // this.parentFragment?.let { fragmentOnBackPressed(it, this.requireActivity()) }
     }
+
 
     @SuppressLint("UseRequireInsteadOfGet")
     protected open fun getBundle() {
@@ -125,4 +125,5 @@ abstract class BaseFragment<dataBinding : ViewDataBinding> : Fragment() {
 //                }
 //            })
 //    }
+    abstract fun initView()
 }
